@@ -49,14 +49,14 @@ getCommand = do
 updateWorld :: World -> Command -> World
 updateWorld (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss)) command =
   case command of
-    MoveUp1    | x1 >  1 && x01 < 400  -> World (Player (x1 - 1) y1) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
-    MoveDown1  | x1 < 40 && x01 < 400  -> World (Player (x1 + 1) y1) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
-    MoveLeft1  | y1 >  1 && x01 < 400  -> World (Player x1 (y1 - 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
-    MoveRight1 | y1 < 148 && x01 < 400 -> World (Player x1 (y1 + 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
-    MoveUp2    | x2 >  1 && x02 < 600  -> World (Player x1 y1) (Player (x2 - 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveDown2  | x2 < 40 && x02 < 600  -> World (Player x1 y1) (Player (x2 + 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveLeft2  | y2 >  1 && x02 < 600  -> World (Player x1 y1) (Player x2 (y2 - 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveRight2 | y2 < 148 && x02 < 600 -> World (Player x1 y1) (Player x2 (y2 + 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveUp1    | x1 >  1 && x01 < 100  -> World (Player (x1 - 1) y1) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
+    MoveDown1  | x1 < 40 && x01 < 100  -> World (Player (x1 + 1) y1) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
+    MoveLeft1  | y1 >  1 && x01 < 100  -> World (Player x1 (y1 - 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
+    MoveRight1 | y1 < 148 && x01 < 100 -> World (Player x1 (y1 + 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
+    MoveUp2    | x2 >  1 && x02 < 300  -> World (Player x1 y1) (Player (x2 - 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveDown2  | x2 < 40 && x02 < 300  -> World (Player x1 y1) (Player (x2 + 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveLeft2  | y2 >  1 && x02 < 300  -> World (Player x1 y1) (Player x2 (y2 - 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveRight2 | y2 < 148 && x02 < 300 -> World (Player x1 y1) (Player x2 (y2 + 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
     Lessen     | x01 >= 3              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 3) x02) (Scores sh ss)
     Lessen     | x01 == 2              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 2) x02) (Scores sh ss)
     Lessen     | x01 == 1              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 1) x02) (Scores sh ss)

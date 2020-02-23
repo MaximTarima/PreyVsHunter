@@ -53,10 +53,10 @@ updateWorld (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss))
     MoveDown1  | x1 < 40 && x01 < 100  -> World (Player (x1 + 1) y1) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
     MoveLeft1  | y1 >  1 && x01 < 100  -> World (Player x1 (y1 - 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
     MoveRight1 | y1 < 148 && x01 < 100 -> World (Player x1 (y1 + 1)) (Player x2 y2) (Moves (x01 + 1) x02) (Scores sh ss)
-    MoveUp2    | x2 >  1 && x02 < 300  -> World (Player x1 y1) (Player (x2 - 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveDown2  | x2 < 40 && x02 < 300  -> World (Player x1 y1) (Player (x2 + 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveLeft2  | y2 >  1 && x02 < 300  -> World (Player x1 y1) (Player x2 (y2 - 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
-    MoveRight2 | y2 < 148 && x02 < 300 -> World (Player x1 y1) (Player x2 (y2 + 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveUp2    | x2 >  1 && x02 < 600  -> World (Player x1 y1) (Player (x2 - 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveDown2  | x2 < 40 && x02 < 600  -> World (Player x1 y1) (Player (x2 + 1) y2) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveLeft2  | y2 >  1 && x02 < 600  -> World (Player x1 y1) (Player x2 (y2 - 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
+    MoveRight2 | y2 < 148 && x02 < 600 -> World (Player x1 y1) (Player x2 (y2 + 1)) (Moves x01 (x02 + 1)) (Scores sh ss)
     Lessen     | x01 >= 3              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 3) x02) (Scores sh ss)
     Lessen     | x01 == 2              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 2) x02) (Scores sh ss)
     Lessen     | x01 == 1              -> World (Player x1 y1) (Player x2 y2) (Moves (x01 - 1) x02) (Scores sh ss)
@@ -81,11 +81,11 @@ resetWorldIf :: World -> World -> IO World
 resetWorldIf
     (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss))
     world2@(World (Player x1' y1') (Player x2' y2') (Moves x01' x02') (Scores sh' ss')) =
-  if x1' == x2' && y1' == y2' || x02 == 300
+  if x1' == x2' && y1' == y2' || x02 == 600
     then do
       drawWorld world2
       waitForKeyPress
-      if x02 == 300
+      if x02 == 600
         then return (World (Player 2 2) (Player 2 147) (Moves 0 0) (Scores (sh + 1) ss))
         else return (World (Player 2 2) (Player 2 147) (Moves 0 0) (Scores sh (ss + 1)))
     else
@@ -109,7 +109,7 @@ drawWorld :: World -> IO ()
 drawWorld (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss)) = do
   clearScreen
   setCursorPosition 0 0
-  putStr ("Prey: " ++ (show x01) ++ "/100 Predator: " ++ (show x02) ++ "/300")
+  putStr ("Prey: " ++ (show x01) ++ "/100 Predator: " ++ (show x02) ++ "/600")
   setCursorPosition 0 35
   putStr ("Prey Score: " ++ (show sh) ++ "  Predator Score: " ++ (show ss))
   setCursorPosition x1 y1

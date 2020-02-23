@@ -81,11 +81,11 @@ resetWorldIf :: World -> World -> IO World
 resetWorldIf
     (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss))
     world2@(World (Player x1' y1') (Player x2' y2') (Moves x01' x02') (Scores sh' ss')) =
-  if x1' == x2' && y1' == y2' || x02 == 600
+  if x1' == x2' && y1' == y2' || x02 == 300
     then do
       drawWorld world2
       waitForKeyPress
-      if x02 == 600
+      if x02 == 300
         then return (World (Player 2 2) (Player 2 147) (Moves 0 0) (Scores (sh + 1) ss))
         else return (World (Player 2 2) (Player 2 147) (Moves 0 0) (Scores sh (ss + 1)))
     else
@@ -109,7 +109,7 @@ drawWorld :: World -> IO ()
 drawWorld (World (Player x1 y1) (Player x2 y2) (Moves x01 x02) (Scores sh ss)) = do
   clearScreen
   setCursorPosition 0 0
-  putStr ("Prey: " ++ (show x01) ++ "/400 Predator: " ++ (show x02) ++ "/600")
+  putStr ("Prey: " ++ (show x01) ++ "/100 Predator: " ++ (show x02) ++ "/300")
   setCursorPosition 0 35
   putStr ("Prey Score: " ++ (show sh) ++ "  Predator Score: " ++ (show ss))
   setCursorPosition x1 y1
